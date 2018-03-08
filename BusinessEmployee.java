@@ -1,18 +1,23 @@
 public abstract class BusinessEmployee extends Employee {
 
+    private double bonusBudget;
+
     public BusinessEmployee(String name, double salary) {
         super(name,salary);
+        this.bonusBudget = 0.0;
     }
 
-    public abstract double getBonusBadget();
-
-    public abstract String employeeStatus();
-
-    public int getEmployeeID() {
-        return super.getEmployeeID();
+    public double getBonusBadget() {
+        return this.bonusBudget;
     }
 
-    public String toString() {
-        return super.toString();
+    public void setBonusBudget(double bonusBudget) {
+        this.bonusBudget = bonusBudget;
     }
+
+    public String employeeStatus() {
+        String result = super.toString() + " with a budget of " + this.bonusBudget;
+        return result;
+    }
+
 }
