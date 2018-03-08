@@ -5,10 +5,11 @@ public abstract class TechnicalEmployee extends Employee {
     public TechnicalEmployee(String name, double salary) {
         super(name,salary);
         this.successfulCheckIns = 0;
+        super.setManager(null);
     }
 
     public String employeeStatus() {
-        String result = this.toString() + " has " + Integer.toString(this.successfulCheckIns) + " successful check ins.";
+        String result = super.toString() + " has " + this.successfulCheckIns + " successful check ins";
         return result;
     }
 
@@ -16,11 +17,7 @@ public abstract class TechnicalEmployee extends Employee {
         return this.successfulCheckIns;
     }
 
-    public int getEmployeeID() {
-        return super.getEmployeeID();
-    }
-
-    public String toString() {
-        return super.toString();
+    public void increaseSuccessfulCheckIns() {
+        this.successfulCheckIns++;
     }
 }
