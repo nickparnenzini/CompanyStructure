@@ -19,5 +19,4 @@ public abstract class BusinessEmployee extends Employee {
         String result = super.toString() + " with a budget of " + this.bonusBudget;
         return result;
     }
-
 }
