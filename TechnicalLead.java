@@ -4,7 +4,6 @@ public class TechnicalLead extends TechnicalEmployee {
 
     private int defaultHeadCount;
     private int currentReport;
-    private Employee manager;
     private LinkedList<SoftwareEngineer> swees;
     private Accountant supportedAccountant;
 
@@ -12,8 +11,9 @@ public class TechnicalLead extends TechnicalEmployee {
         super(name,97500.0);
         this.defaultHeadCount = 4;
         this.currentReport = 0;
-        this.manager = null;
+        super.setManager(null);
         this.supportedAccountant = null;
+        super.isManager(true);
     }
 
     public boolean hasHeadCount() {
@@ -23,13 +23,14 @@ public class TechnicalLead extends TechnicalEmployee {
     public boolean addReport(SoftwareEngineer e) {
         if (swees.size() < 4) {
             swees.add(e);
+            e.setManager(this);
             return true;
         }
         return false;
     }
 
     public Employee getManager() {
-        return this.manager;
+        return super.getManager();
     }
 
     public void setSupportedAccountant(Accountant a) {
@@ -58,9 +59,9 @@ public class TechnicalLead extends TechnicalEmployee {
 
     public String getTeamStatus() {
         if (swees.isEmpty()) {
-            return super.employeeStatus() + " and no direct reports yet";
+            return this.employeeStatus() + " and no direct reports yet";
         }
-        StringBuilder result = new StringBuilder(super.employeeStatus() + " and is managing:/n");
+        StringBuilder result = new StringBuilder(this.employeeStatus() + " and is managing:/n");
         for (SoftwareEngineer s : swees) {
             result.append(s.employeeStatus() + "/n");
         }
@@ -69,5 +70,9 @@ public class TechnicalLead extends TechnicalEmployee {
 
     public LinkedList<SoftwareEngineer> getSwees() {
         return swees;
+    }
+
+    public String employeeStatus() {
+        return super.employeeStatus();
     }
 }
