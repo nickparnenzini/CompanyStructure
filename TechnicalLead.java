@@ -9,6 +9,7 @@ public class TechnicalLead extends TechnicalEmployee {
 
     public TechnicalLead(String name) {
         super(name,97500.0);
+        swees = new LinkedList<SoftwareEngineer>();
         this.defaultHeadCount = 4;
         this.currentReport = 0;
         super.setManager(null);
@@ -61,9 +62,9 @@ public class TechnicalLead extends TechnicalEmployee {
         if (swees.isEmpty()) {
             return this.employeeStatus() + " and no direct reports yet";
         }
-        StringBuilder result = new StringBuilder(this.employeeStatus() + " and is managing:/n");
+        StringBuilder result = new StringBuilder(this.employeeStatus() + " and is managing:\n");
         for (SoftwareEngineer s : swees) {
-            result.append(s.employeeStatus() + "/n");
+            result.append(s.employeeStatus() + "\n");
         }
         return result.toString();
     }
