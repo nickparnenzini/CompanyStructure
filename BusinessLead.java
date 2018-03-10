@@ -7,6 +7,7 @@ public class BusinessLead extends BusinessEmployee {
 
     public BusinessLead(String name) {
         super(name,100000);
+        accountants = new LinkedList<Accountant>();
         this.headCount = 10;
     }
 
@@ -25,6 +26,7 @@ public class BusinessLead extends BusinessEmployee {
     public boolean addReport(Accountant e, TechnicalLead supportTeam) {
         if (accountants.size() < headCount) {
             accountants.add(e);
+            e.supportTeam(supportTeam);
             double newBudget = super.getBonusBadget() + (e.getBonusBadget()*1.1);
             super.setBonusBudget(newBudget);
             supportTeam.setSupportedAccountant(e);
@@ -54,5 +56,20 @@ public class BusinessLead extends BusinessEmployee {
             }
         }
         return false;
+    }
+
+    public String getTeamStatus() {
+        if (accountants.isEmpty()) {
+            return this.employeeStatus() + " and no direct reports yet";
+        }
+        StringBuilder result = new StringBuilder(this.employeeStatus() + " and is managing:\n");
+        for (Accountant a : accountants) {
+            result.append(a.employeeStatus() + "\n");
+        }
+        return result.toString();
+    }
+
+    public String employeeStatus() {
+        return super.employeeStatus();
     }
 }
