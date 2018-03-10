@@ -12,7 +12,7 @@ public abstract class Employee {
         this.name = name;
         this.baseSalary = baseSalary;
         this.bonus = 0.0;
-        this.employeeID = employees++;
+        this.employeeID = ++employees;
         this.manager = null;
         this.isManager = false;
     }
