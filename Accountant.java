@@ -9,6 +9,7 @@ public class Accountant extends BusinessEmployee {
         super(name,50000);
         this.teamSupported = null;
         this.manager = null;
+        super.isManager(false);
     }
 
     public TechnicalLead getTeamSupported() {
@@ -24,13 +25,16 @@ public class Accountant extends BusinessEmployee {
     }
 
     public void supportTeam(TechnicalLead lead) {
-        LinkedList<SoftwareEngineer> swees = lead.getSwees();
-        double bonusBadget = 0.0;
-        for (SoftwareEngineer s : swees) {
-            bonusBadget += s.getBaseSalary();
+        if (this.teamSupported == null) {
+            this.teamSupported = new TechnicalLead(lead.getName());
+            LinkedList<SoftwareEngineer> swees = lead.getSwees();
+            double bonusBadget = 0.0;
+            for (SoftwareEngineer s : swees) {
+                bonusBadget += s.getBaseSalary();
+            }
+            bonusBadget += (bonusBadget) * 0.1;
+            super.setBonusBudget(bonusBadget);
         }
-        bonusBadget += (bonusBadget)*0.1;
-        super.setBonusBudget(bonusBadget);
     }
 
     public boolean approveBonus(double bonus) {
@@ -43,7 +47,7 @@ public class Accountant extends BusinessEmployee {
     }
 
     public String employeeStatus() {
-        String result = super.toString() + " with a budget of " + Double.toString(super.getBonusBadget()) + " is supporting " + teamSupported.getName();
+        String result = super.toString() + " with a budget of " + Double.toString(super.getBonusBadget()) + " and is supporting " + teamSupported.getName();
         return result;
     }
 }
